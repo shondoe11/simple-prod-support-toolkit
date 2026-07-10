@@ -1,14 +1,13 @@
 # Simple Production Support Toolkit
-> Learn Linux, Bash, SQL, and Production Support through realistic enterprise scenarios.
+> Improving Linux, Bash, SQL, and Production Support through realistic enterprise scenarios.
 
 ## Vision
 
-**simple-prod-support-toolkit** is a hands-on learning project designed to simulate the daily responsibilities in Production Support.
+**simple-prod-support-toolkit** = hands-on learning project designed to simulate the daily responsibilities in Production Support.
 
 This repo provides a realistic production environment where every script solves an operational problem commonly encountered by support engineers.
 
 Inspired by real enterprise application support workflows including:
-
 - Prod health monitoring
 - Incident investigation
 - SQL troubleshooting
