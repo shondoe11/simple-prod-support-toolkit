@@ -1,0 +1,1 @@
+-- analyzes bounce codes and rates across campaigns

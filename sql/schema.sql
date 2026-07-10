@@ -1,0 +1,1 @@
+-- production.db schema: customers, campaigns, email_deliveries, bounce_events, batch_jobs, audit_logs (phase 2)

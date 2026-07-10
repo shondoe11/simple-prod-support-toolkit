@@ -1,0 +1,1 @@
+-- finds customers with no recent activity

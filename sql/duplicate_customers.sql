@@ -1,0 +1,1 @@
+-- finds duplicate customer records by email

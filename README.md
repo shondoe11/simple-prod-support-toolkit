@@ -45,7 +45,7 @@ LICENSE
 docs/                  architecture, roadmap, cheatsheets, incident workflow
 scripts/               health checks, log analysis, incident investigation, db maintenance
 sql/                   schema, seed data, operational troubleshooting queries
-database/              production.db (SQLite)
+db/                    production.db (SQLite)
 logs/                  simulated application logs
 reports/               generated daily reports
 archive/               compressed old logs

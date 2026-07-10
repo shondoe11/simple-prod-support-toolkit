@@ -1,0 +1,1 @@
+-- summarizes campaign performance (recipients, bounce rate, delivery status breakdown)
