@@ -1,1 +1,130 @@
--- realistic seed data for production.db tables (phase 2)
+-- AI generate realistic seed data for production.db tables
+
+-- customers
+INSERT INTO customers (email, first_name, last_name, status, created_at) VALUES
+('alice.wong@example.com', 'Alice', 'Wong', 'active', '2025-01-05 09:12:00'),
+('brian.tan@example.com', 'Brian', 'Tan', 'active', '2025-01-06 10:03:00'),
+('carmen.lee@example.com', 'Carmen', 'Lee', 'active', '2025-01-08 14:22:00'),
+('daniel.ong@example.com', 'Daniel', 'Ong', 'inactive', '2025-01-09 08:45:00'),
+('evelyn.goh@example.com', 'Evelyn', 'Goh', 'active', '2025-01-10 16:31:00'),
+('farid.hassan@example.com', 'Farid', 'Hassan', 'active', '2025-01-11 11:18:00'),
+('grace.lim@example.com', 'Grace', 'Lim', 'unsubscribed', '2025-01-12 09:55:00'),
+('hafiz.rahman@example.com', 'Hafiz', 'Rahman', 'active', '2025-01-13 13:40:00'),
+('isabel.cruz@example.com', 'Isabel', 'Cruz', 'active', '2025-01-14 15:27:00'),
+('jason.ng@example.com', 'Jason', 'Ng', 'active', '2025-01-15 10:09:00'),
+('karen.teo@example.com', 'Karen', 'Teo', 'inactive', '2025-01-16 12:52:00'),
+('leon.chua@example.com', 'Leon', 'Chua', 'active', '2025-01-17 17:03:00'),
+('mei.lin@example.com', 'Mei', 'Lin', 'active', '2025-01-18 09:20:00'),
+('nurul.aini@example.com', 'Nurul', 'Aini', 'active', '2025-01-19 14:11:00'),
+('oscar.reyes@example.com', 'Oscar', 'Reyes', 'unsubscribed', '2025-01-20 08:33:00'),
+('priya.nair@example.com', 'Priya', 'Nair', 'active', '2025-01-21 11:47:00'),
+('quentin.low@example.com', 'Quentin', 'Low', 'active', '2025-01-22 16:05:00'),
+('rachel.koh@example.com', 'Rachel', 'Koh', 'active', '2025-01-23 10:58:00'),
+('samuel.yap@example.com', 'Samuel', 'Yap', 'inactive', '2025-01-24 09:41:00'),
+('tina.chong@example.com', 'Tina', 'Chong', 'active', '2025-01-25 13:15:00'),
+('umar.faruk@example.com', 'Umar', 'Faruk', 'active', '2025-01-26 15:36:00'),
+('vanessa.tay@example.com', 'Vanessa', 'Tay', 'active', '2025-01-27 08:52:00'),
+('wei.chen@example.com', 'Wei', 'Chen', 'active', '2025-01-28 12:29:00'),
+('xiu.ying@example.com', 'Xiu', 'Ying', 'active', '2025-01-29 17:44:00'),
+('yusuf.ibrahim@example.com', 'Yusuf', 'Ibrahim', 'active', '2025-01-30 09:03:00');
+
+-- campaigns
+INSERT INTO campaigns (campaign_id, campaign_name, sending_domain, send_time) VALUES
+('CMP-1021', 'January Newsletter', 'news.shon.io', '2025-01-31 08:00:00'),
+('CMP-1022', 'Product Launch Announcement', 'mail.shon.io', '2025-02-03 09:00:00'),
+('CMP-1023', 'Winter Promo Blast', 'promo.shon.io', '2025-02-05 07:30:00'),
+('CMP-1024', 'Account Security Alert', 'alerts.shon.io', '2025-02-07 10:15:00'),
+('CMP-1025', 'Weekly Digest', 'news.shon.io', '2025-02-10 08:00:00'),
+('CMP-1026', 'Re-engagement Campaign', 'mail.shon.io', '2025-02-12 11:00:00');
+
+-- bounce_events reference data
+INSERT INTO bounce_events (bounce_code, description, smtp_provider, created_at) VALUES
+('1852', 'Mailbox does not exist', 'Gmail SMTP', '2025-01-01 00:00:00'),
+('2201', 'Recipient address rejected', 'Outlook SMTP', '2025-01-01 00:00:00'),
+('3005', 'Message blocked as spam', 'Yahoo SMTP', '2025-01-01 00:00:00'),
+('4110', 'Connection timed out', 'Generic SMTP', '2025-01-01 00:00:00'),
+('5500', 'Permanent delivery failure', 'Generic SMTP', '2025-01-01 00:00:00');
+
+-- email_deliveries: mix of delivered / opened / clicked / bounced across campaigns
+INSERT INTO email_deliveries (campaign_id, customer_id, status, bounce_code, delivered_at) VALUES
+('CMP-1021', 1, 'delivered', NULL, '2025-01-31 08:01:00'),
+('CMP-1021', 2, 'opened', NULL, '2025-01-31 08:02:00'),
+('CMP-1021', 3, 'bounced', '1852', '2025-01-31 08:02:30'),
+('CMP-1021', 4, 'delivered', NULL, '2025-01-31 08:03:00'),
+('CMP-1021', 5, 'clicked', NULL, '2025-01-31 08:03:30'),
+('CMP-1021', 6, 'bounced', '4110', '2025-01-31 08:04:00'),
+('CMP-1021', 7, 'delivered', NULL, '2025-01-31 08:04:30'),
+('CMP-1021', 8, 'opened', NULL, '2025-01-31 08:05:00'),
+('CMP-1022', 9, 'delivered', NULL, '2025-02-03 09:01:00'),
+('CMP-1022', 10, 'clicked', NULL, '2025-02-03 09:01:30'),
+('CMP-1022', 11, 'bounced', '2201', '2025-02-03 09:02:00'),
+('CMP-1022', 12, 'delivered', NULL, '2025-02-03 09:02:30'),
+('CMP-1022', 13, 'opened', NULL, '2025-02-03 09:03:00'),
+('CMP-1022', 14, 'delivered', NULL, '2025-02-03 09:03:30'),
+('CMP-1023', 1, 'bounced', '1852', '2025-02-05 07:31:00'),
+('CMP-1023', 2, 'bounced', '1852', '2025-02-05 07:31:15'),
+('CMP-1023', 3, 'delivered', NULL, '2025-02-05 07:31:30'),
+('CMP-1023', 4, 'delivered', NULL, '2025-02-05 07:31:45'),
+('CMP-1023', 5, 'opened', NULL, '2025-02-05 07:32:00'),
+('CMP-1023', 6, 'clicked', NULL, '2025-02-05 07:32:15'),
+('CMP-1023', 7, 'bounced', '4110', '2025-02-05 07:32:30'),
+('CMP-1023', 8, 'delivered', NULL, '2025-02-05 07:32:45'),
+('CMP-1023', 9, 'bounced', '1852', '2025-02-05 07:33:00'),
+('CMP-1023', 10, 'delivered', NULL, '2025-02-05 07:33:15'),
+('CMP-1023', 11, 'opened', NULL, '2025-02-05 07:33:30'),
+('CMP-1023', 12, 'delivered', NULL, '2025-02-05 07:33:45'),
+('CMP-1023', 13, 'clicked', NULL, '2025-02-05 07:34:00'),
+('CMP-1023', 14, 'delivered', NULL, '2025-02-05 07:34:15'),
+('CMP-1023', 15, 'bounced', '3005', '2025-02-05 07:34:30'),
+('CMP-1023', 16, 'delivered', NULL, '2025-02-05 07:34:45'),
+('CMP-1023', 17, 'opened', NULL, '2025-02-05 07:35:00'),
+('CMP-1023', 18, 'delivered', NULL, '2025-02-05 07:35:15'),
+('CMP-1023', 19, 'bounced', '1852', '2025-02-05 07:35:30'),
+('CMP-1023', 20, 'delivered', NULL, '2025-02-05 07:35:45'),
+('CMP-1024', 21, 'delivered', NULL, '2025-02-07 10:16:00'),
+('CMP-1024', 22, 'opened', NULL, '2025-02-07 10:16:30'),
+('CMP-1024', 23, 'delivered', NULL, '2025-02-07 10:17:00'),
+('CMP-1024', 24, 'bounced', '5500', '2025-02-07 10:17:30'),
+('CMP-1024', 25, 'delivered', NULL, '2025-02-07 10:18:00'),
+('CMP-1025', 1, 'delivered', NULL, '2025-02-10 08:01:00'),
+('CMP-1025', 5, 'opened', NULL, '2025-02-10 08:01:30'),
+('CMP-1025', 9, 'clicked', NULL, '2025-02-10 08:02:00'),
+('CMP-1025', 13, 'delivered', NULL, '2025-02-10 08:02:30'),
+('CMP-1025', 17, 'bounced', '2201', '2025-02-10 08:03:00'),
+('CMP-1026', 4, 'delivered', NULL, '2025-02-12 11:01:00'),
+('CMP-1026', 8, 'bounced', '4110', '2025-02-12 11:01:30'),
+('CMP-1026', 12, 'delivered', NULL, '2025-02-12 11:02:00'),
+('CMP-1026', 16, 'opened', NULL, '2025-02-12 11:02:30'),
+('CMP-1026', 20, 'delivered', NULL, '2025-02-12 11:03:00');
+
+-- batch_jobs run history
+INSERT INTO batch_jobs (job_name, status, duration, retry_count, last_run) VALUES
+('customer_import', 'success', 42, 0, '2025-02-11 02:00:00'),
+('customer_import', 'success', 39, 0, '2025-02-12 02:00:00'),
+('customer_import', 'failed', 12, 2, '2025-02-13 02:00:00'),
+('customer_import', 'success', 45, 1, '2025-02-14 02:00:00'),
+('campaign_cleanup', 'success', 18, 0, '2025-02-11 03:00:00'),
+('campaign_cleanup', 'success', 20, 0, '2025-02-12 03:00:00'),
+('campaign_cleanup', 'success', 19, 0, '2025-02-13 03:00:00'),
+('campaign_cleanup', 'failed', 5, 3, '2025-02-14 03:00:00'),
+('analytics_refresh', 'success', 210, 0, '2025-02-11 04:00:00'),
+('analytics_refresh', 'failed', 87, 2, '2025-02-12 04:00:00'),
+('analytics_refresh', 'success', 198, 1, '2025-02-13 04:00:00'),
+('analytics_refresh', 'success', 205, 0, '2025-02-14 04:00:00'),
+('nightly_backup', 'success', 300, 0, '2025-02-11 01:00:00'),
+('nightly_backup', 'success', 295, 0, '2025-02-12 01:00:00'),
+('nightly_backup', 'success', 310, 0, '2025-02-13 01:00:00'),
+('nightly_backup', 'running', 0, 0, '2025-02-14 01:00:00');
+
+-- audit_logs
+INSERT INTO audit_logs (action, user, timestamp) VALUES
+('user_login', 'shondoe11', '2025-02-11 08:00:00'),
+('campaign_created', 'shondoe11', '2025-02-11 08:15:00'),
+('customer_status_updated', 'system', '2025-02-11 09:00:00'),
+('backup_completed', 'system', '2025-02-11 01:05:00'),
+('user_login', 'shondoe11', '2025-02-12 08:02:00'),
+('campaign_sent', 'system', '2025-02-12 09:00:00'),
+('batch_job_retried', 'system', '2025-02-13 02:05:00'),
+('user_login', 'shondoe11', '2025-02-13 08:01:00'),
+('database_restored', 'shondoe11', '2025-02-13 14:30:00'),
+('user_login', 'shondoe11', '2025-02-14 08:03:00');
