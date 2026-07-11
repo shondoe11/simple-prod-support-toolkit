@@ -63,6 +63,21 @@ sample-data/           CSV seed sources
 - **batch_jobs**: job_name, status, duration, retry_count, last_run
 - **audit_logs**: id, action, user, timestamp
 
+## Running This Project
+
+Scripts use Linux-only commands (`free`, `pgrep`, `/proc/loadavg`, `mpstat`, etc.) and will **not** run natively on macOS or Windows. Use Docker:
+
+```bash
+docker build -t prod-support-toolkit .
+docker run -it --rm -v "$(pwd):/app" prod-support-toolkit
+```
+
+Then inside the container:
+
+```bash
+./scripts/health_check.sh
+```
+
 ## License
 
 [MIT](LICENSE)
