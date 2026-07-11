@@ -1,0 +1,21 @@
+2026-02-14 02:00:00 INFO Job customer_import started
+2026-02-14 02:00:42 INFO Job customer_import completed in 42s
+2026-02-14 02:00:42 INFO Job campaign_cleanup started
+2026-02-14 02:00:18 WARN Job campaign_cleanup retrying (attempt 1)
+2026-02-14 02:00:20 INFO Job campaign_cleanup completed in 20s
+2026-02-14 02:00:20 INFO Job analytics_refresh started
+2026-02-14 02:03:30 ERROR Job analytics_refresh failed after 210s
+2026-02-14 02:03:31 WARN Job analytics_refresh retrying (attempt 1)
+2026-02-14 02:07:05 INFO Job analytics_refresh completed in 205s
+2026-02-14 01:00:00 INFO Job nightly_backup started
+2026-02-14 01:00:00 INFO Job nightly_backup running
+2026-02-13 02:00:00 INFO Job customer_import started
+2026-02-13 02:00:12 ERROR Job customer_import failed after 12s
+2026-02-13 02:00:13 WARN Job customer_import retrying (attempt 1)
+2026-02-13 02:00:25 ERROR Job customer_import failed after 12s
+2026-02-13 02:00:26 WARN Job customer_import retrying (attempt 2)
+2026-02-13 02:00:45 INFO Job customer_import completed in 45s
+2026-02-13 03:00:00 INFO Job campaign_cleanup started
+2026-02-13 03:00:19 INFO Job campaign_cleanup completed in 19s
+2026-02-13 04:00:00 INFO Job analytics_refresh started
+2026-02-13 04:03:18 INFO Job analytics_refresh completed in 198s

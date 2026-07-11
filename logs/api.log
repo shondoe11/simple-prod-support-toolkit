@@ -1,0 +1,14 @@
+2026-02-14 08:00:01 INFO GET /api/campaigns/CMP-1023 200 42ms
+2026-02-14 08:00:05 INFO POST /api/deliveries 201 88ms
+2026-02-14 08:00:22 ERROR POST /api/deliveries 502 5012ms upstream SMTP timeout
+2026-02-14 08:00:41 ERROR POST /api/deliveries 502 4890ms upstream connection refused
+2026-02-14 08:01:02 WARN GET /api/campaigns/CMP-1023/stats 200 812ms slow response
+2026-02-14 08:01:25 ERROR POST /api/deliveries 502 5030ms upstream SMTP timeout
+2026-02-14 08:02:30 ERROR POST /api/deliveries 502 4910ms upstream connection refused
+2026-02-14 08:04:16 INFO GET /api/campaigns/CMP-1023/summary 200 55ms
+2026-02-14 09:00:00 INFO GET /api/campaigns/CMP-1024 200 39ms
+2026-02-14 09:00:45 ERROR POST /api/deliveries 502 4870ms upstream connection refused
+2026-02-14 09:01:45 INFO GET /api/campaigns/CMP-1024/summary 200 48ms
+2026-02-14 10:15:02 INFO GET /api/customers/9 200 21ms
+2026-02-14 10:15:10 WARN GET /api/customers 200 634ms slow response
+2026-02-14 10:20:00 INFO POST /api/customers 201 65ms
