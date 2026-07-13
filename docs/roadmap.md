@@ -83,9 +83,9 @@ Jobs: `customer_import`, `campaign_cleanup`, `analytics_refresh`, `nightly_backu
 
 ## Phase 8 — Database Maintenance
 
-`backup_database.sh` — Creates timestamped backups.
+`backup_db.sh` — Creates timestamped backups.
 
-`restore_database.sh` — Restores backups.
+`restore_db.sh` — Restores backups.
 
 **Learn**: `cp`, timestamps
 
