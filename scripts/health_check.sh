@@ -2,6 +2,7 @@
 #& hostname, uptime, cpu, memory, disk, db + running services status
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=./utils.sh
 source "$SCRIPT_DIR/utils.sh"
 
 DB_PATH="$SCRIPT_DIR/../db/production.db"

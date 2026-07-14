@@ -2,6 +2,7 @@
 #& info/warn/error counts output
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=./utils.sh
 source "$SCRIPT_DIR/utils.sh"
 
 LOG_DIR="$SCRIPT_DIR/../logs"
@@ -14,6 +15,7 @@ fi
 
 print_section "Log Summary"
 for level in INFO WARN ERROR; do
+    # shellcheck disable=SC2126
     count="$(grep -h -E " ${level} " "${TARGET_FILES[@]}" 2>/dev/null | wc -l)"
     log_info "$level: $count"
 done

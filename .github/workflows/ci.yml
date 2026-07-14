@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  shellcheck:
+    name: ShellCheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run ShellCheck
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shellcheck
+          shellcheck --severity=warning scripts/*.sh
+
+  sql-validation:
+    name: SQL Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate schema, seed, and query files
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sqlite3
+          sqlite3 /tmp/test.db < sql/schema.sql
+          sqlite3 /tmp/test.db < sql/seed.sql
+          for f in sql/*.sql; do
+            name="$(basename "$f")"
+            if [ "$name" = "schema.sql" ] || [ "$name" = "seed.sql" ]; then
+              continue
+            fi
+            echo "Validating $f"
+            sqlite3 /tmp/test.db < "$f" > /dev/null
+          done
+
+  markdown-lint:
+    name: Markdown Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run markdownlint-cli2
+        uses: DavidAnson/markdownlint-cli2-action@v16
+        with:
+          globs: '**/*.md'

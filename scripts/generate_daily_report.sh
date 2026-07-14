@@ -2,6 +2,7 @@
 #& outputs reports/daily_report.md with cpu, memory, disk, error count, failed jobs, db status, recommendations
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=./utils.sh
 source "$SCRIPT_DIR/utils.sh"
 
 DB_PATH="$SCRIPT_DIR/../db/production.db"
@@ -20,6 +21,7 @@ MEM_PCT="$(free | awk '/Mem:/ {printf "%.1f", ($3/$2)*100}')"
 
 DISK_INFO="$(df -h | tail -n +2 | awk '{print $NF, $5}')"
 
+# shellcheck disable=SC2126
 ERROR_COUNT="$(grep -h -E " ERROR " "$LOG_DIR"/*.log 2>/dev/null | wc -l)"
 
 FAILED_JOBS="$(sqlite3 -separator '|' "$DB_PATH" "SELECT job_name, retry_count FROM batch_jobs WHERE status='failed';" 2>/dev/null)"
