@@ -32,7 +32,7 @@ Should report hostname, uptime, CPU, memory, disk, database, running services.
 
 Create realistic application logs, e.g.:
 
-```
+```text
 INFO Starting application
 INFO Database connected
 WARN Slow query
@@ -59,13 +59,13 @@ Each SQL file answers one operational question: `campaign_summary.sql`, `duplica
 
 `./investigate_incident.sh` prompts for Campaign ID or Customer Email.
 
-```
+```text
 Receive Incident -> Read Logs -> Run SQL -> Check Batch Jobs -> Determine Root Cause -> Generate Report
 ```
 
 Example output:
 
-```
+```text
 Incident Report
 Campaign: CMP-1023
 Recipients: 120000
@@ -121,7 +121,6 @@ Each concept to become a feature:
 | find | archive_logs.sh |
 | SQL JOIN | campaign_summary.sql |
 | pipes | investigate_incident.sh |
-
 
 ## Success Criteria
 

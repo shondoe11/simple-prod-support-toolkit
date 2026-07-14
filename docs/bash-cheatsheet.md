@@ -1,6 +1,5 @@
 # Bash Cheatsheet
 
-
 ## ShellCheck (Phase 10)
 
 - **Run it**: `shellcheck scripts/*.sh` — install via `brew install shellcheck` (mac) or `apt-get install shellcheck` (Linux/CI).

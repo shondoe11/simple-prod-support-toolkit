@@ -1,4 +1,5 @@
 # Simple Production Support Toolkit
+
 > Improving Linux, Bash, SQL, and Production Support through realistic enterprise scenarios.
 
 ## Vision
@@ -8,6 +9,7 @@
 This repo provides a realistic production environment where every script solves an operational problem commonly encountered by support engineers.
 
 Inspired by real enterprise application support workflows including:
+
 - Prod health monitoring
 - Incident investigation
 - SQL troubleshooting
@@ -30,13 +32,13 @@ Full phase-by-phase roadmap: [`docs/roadmap.md`](docs/roadmap.md)
 
 **Shon Messaging Platform** — a cloud platform that delivers millions of emails and notifications every day.
 
-```
+```text
 Customers -> Campaigns -> API -> Email Service -> Database -> Logs -> Batch Jobs -> Reports
 ```
 
 ## Repo Structure
 
-```
+```text
 simple-prod-support-toolkit/
 README.md
 LICENSE

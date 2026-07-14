@@ -58,22 +58,27 @@ print_section "Generating Daily Report"
     echo "Generated: $TIMESTAMP"
     echo ""
     echo "## CPU"
-    echo '```'
+    echo ""
+    echo '```text'
     echo "$CPU_INFO"
     echo '```'
     echo ""
     echo "## Memory"
+    echo ""
     echo "Used: ${MEM_PCT}%"
     echo ""
     echo "## Disk"
-    echo '```'
+    echo ""
+    echo '```text'
     echo "$DISK_INFO"
     echo '```'
     echo ""
     echo "## Errors"
+    echo ""
     echo "Error count (current logs): $ERROR_COUNT"
     echo ""
     echo "## Failed Batch Jobs"
+    echo ""
     if [ "$FAILED_COUNT" -gt 0 ]; then
         echo "$FAILED_JOBS" | while IFS='|' read -r job retries; do
             echo "- $job (retries: $retries)"
@@ -83,9 +88,11 @@ print_section "Generating Daily Report"
     fi
     echo ""
     echo "## Database Status"
+    echo ""
     echo "$DB_STATUS"
     echo ""
     echo "## Recommendations"
+    echo ""
     for rec in "${RECOMMENDATIONS[@]}"; do
         echo "- $rec"
     done
