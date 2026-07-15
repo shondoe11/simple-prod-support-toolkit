@@ -106,7 +106,6 @@ Automatically run ShellCheck, SQL validation, Markdown lint on every commit.
 ## Future Enhancements
 
 - **Python**: HTML dashboard, CSV reports, Slack notifications
-- **Docker**: Containerize SQLite environment
 - **REST API**: Optional Flask API exposing health/reports/incidents
 - **Monitoring**: Simulate Prometheus metrics
 

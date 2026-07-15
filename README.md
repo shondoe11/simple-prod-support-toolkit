@@ -70,15 +70,40 @@ sample-data/           CSV seed sources
 Scripts use Linux-only commands (`free`, `pgrep`, `/proc/loadavg`, `mpstat`, etc.) and will **not** run natively on macOS or Windows. Use Docker:
 
 ```bash
+# 1. clone your fork
+git clone https://github.com/<your-username>/simple-prod-support-toolkit.git
+cd simple-prod-support-toolkit
+
+# 2. build the image (installs sqlite3, procps, sysstat, cron, etc.)
 docker build -t prod-support-toolkit .
+
+# 3. run an interactive container, mounting the repo so file changes sync back
 docker run -it --rm -v "$(pwd):/app" prod-support-toolkit
 ```
 
-Then inside the container:
+`db/production.db` is already committed and seeded — no setup step needed before running scripts.
+
+Then inside the container, run any script directly:
 
 ```bash
 ./scripts/health_check.sh
+./scripts/investigate_incident.sh
+./scripts/generate_daily_report.sh
 ```
+
+See [`docs/roadmap.md`](docs/roadmap.md) for the full list of scripts and what each one does.
+
+### Testing cron (`setup_cron.sh`)
+
+The base Ubuntu image doesn't run `cron` as a service by default. To test `setup_cron.sh` inside the container, start the daemon first:
+
+```bash
+service cron start
+./scripts/setup_cron.sh
+crontab -l
+```
+
+Note the container is ephemeral (`--rm`) — the installed cron job disappears when the container exits. For a persistent setup, run `setup_cron.sh` on a long-lived host or non-`--rm` container instead.
 
 ## License
 
