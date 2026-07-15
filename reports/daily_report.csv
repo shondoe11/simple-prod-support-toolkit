@@ -1,0 +1,8 @@
+metric,value
+generated,2026-07-15 11:12:05
+error_count,24
+failed_job_count,3
+db_status,reachable
+failed_job:customer_import,2
+failed_job:campaign_cleanup,3
+failed_job:analytics_refresh,2

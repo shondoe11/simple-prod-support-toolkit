@@ -38,6 +38,14 @@ jobs:
             sqlite3 /tmp/test.db < "$f" > /dev/null
           done
 
+  python-syntax-check:
+    name: Python Syntax Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile-check Python scripts
+        run: python3 -m py_compile scripts/*.py
+
   markdown-lint:
     name: Markdown Lint
     runs-on: ubuntu-latest

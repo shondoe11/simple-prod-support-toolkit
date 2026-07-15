@@ -103,9 +103,14 @@ Automatically run ShellCheck, SQL validation, Markdown lint on every commit.
 
 **Learn**: `crontab`, cron schedule syntax
 
+## 12 — Python Reporting Enhancements
+
+`generate_dashboard.py` — Reads `production.db` and `logs/`, produces `reports/dashboard.html` (styled dashboard) and `reports/daily_report.csv` (structured metrics). Posts a summary to Slack via incoming webhook if `SLACK_WEBHOOK_URL` is set (stdlib only, no extra dependencies).
+
+**Learn**: Python `sqlite3`, `csv`, `urllib.request`, `html.escape`
+
 ## Future Enhancements
 
-- **Python**: HTML dashboard, CSV reports, Slack notifications
 - **REST API**: Optional Flask API exposing health/reports/incidents
 - **Monitoring**: Simulate Prometheus metrics
 
@@ -123,6 +128,7 @@ Each concept to become a feature:
 | awk | top_errors.sh |
 | sed | log_cleanup.sh |
 | find | archive_logs.sh |
+| Python sqlite3/csv | generate_dashboard.py |
 | SQL JOIN | campaign_summary.sql |
 | pipes | investigate_incident.sh |
 

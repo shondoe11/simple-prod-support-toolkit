@@ -9,10 +9,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gzip \
     tar \
     cron \
+    python3 \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 COPY . .
-RUN chmod +x scripts/*.sh
+RUN chmod +x scripts/*.sh scripts/*.py
 
 CMD ["/bin/bash"]

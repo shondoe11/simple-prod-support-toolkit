@@ -1,6 +1,5 @@
 # Linux Cheatsheet
 
-
 ## Cron (11)
 
 - **Schedule syntax**: `minute hour day-of-month month day-of-week` — e.g. `0 6 * * *` = every day at 6:00am. `*` means "every".

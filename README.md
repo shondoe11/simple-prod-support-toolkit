@@ -89,7 +89,10 @@ Then inside the container, run any script directly:
 ./scripts/health_check.sh
 ./scripts/investigate_incident.sh
 ./scripts/generate_daily_report.sh
+python3 scripts/generate_dashboard.py
 ```
+
+`generate_dashboard.py` produces `reports/dashboard.html` and `reports/daily_report.csv` from `production.db` and `logs/`. Set `SLACK_WEBHOOK_URL` to also post a summary to Slack (stdlib only, no `pip install` required).
 
 See [`docs/roadmap.md`](docs/roadmap.md) for the full list of scripts and what each one does.
 
