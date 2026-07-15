@@ -1,18 +1,18 @@
 # Project Roadmap
 
-## Phase 1 — Repository Setup
+## 1 — Repository Setup
 
 **Goals**: Create project, README, folder structure, GitHub repository, MIT License.
 
 **Learn**: Git, Markdown.
 
-## Phase 2 — SQLite Database
+## 2 — SQLite Database
 
 **Goals**: Build schema, create realistic seed data.
 
 **Learn**: SQL, SQLite.
 
-## Phase 3 — Health Monitoring
+## 3 — Health Monitoring
 
 **Scripts**: `health_check.sh`
 
@@ -28,7 +28,7 @@ Should report hostname, uptime, CPU, memory, disk, database, running services.
 
 `process_monitor.sh` — Checks if important services are running (sqlite, nginx, java, redis, python). **Learn**: `ps`, `grep`, `pgrep`
 
-## Phase 4 — Log Analysis
+## 4 — Log Analysis
 
 Create realistic application logs, e.g.:
 
@@ -49,13 +49,13 @@ INFO Retry successful
 
 `archive_logs.sh` — Compresses old logs. **Learn**: `tar`, `gzip`, `find`
 
-## Phase 5 — SQL Toolkit
+## 5 — SQL Toolkit
 
 Each SQL file answers one operational question: `campaign_summary.sql`, `duplicate_customers.sql`, `inactive_customers.sql`, `bounce_analysis.sql`, `failed_jobs.sql`, `slow_queries.sql`.
 
 `sql_runner.sh` — `./sql_runner.sh bounce_analysis` automatically executes `sqlite3 production.db < sql/bounce_analysis.sql`
 
-## Phase 6 — Incident Investigation (flagship feature)
+## 6 — Incident Investigation (flagship feature)
 
 `./investigate_incident.sh` prompts for Campaign ID or Customer Email.
 
@@ -75,13 +75,13 @@ Recent Errors: SMTP timeout
 Recommendation: Warm sending domain, retry failed jobs, monitor next campaign
 ```
 
-## Phase 7 — Batch Job Monitoring
+## 7 — Batch Job Monitoring
 
 Jobs: `customer_import`, `campaign_cleanup`, `analytics_refresh`, `nightly_backup`
 
 `check_batch_jobs.sh` — Displays success/failed, retry count, duration.
 
-## Phase 8 — Database Maintenance
+## 8 — Database Maintenance
 
 `backup_db.sh` — Creates timestamped backups.
 
@@ -89,19 +89,24 @@ Jobs: `customer_import`, `campaign_cleanup`, `analytics_refresh`, `nightly_backu
 
 **Learn**: `cp`, timestamps
 
-## Phase 9 — Reporting
+## 9 — Reporting
 
 `generate_daily_report.sh` — Produces `reports/daily_report.md` including CPU, memory, disk, error count, failed jobs, database status, recommendations.
 
-## Phase 10 — GitHub Actions
+## 10 — GitHub Actions
 
 Automatically run ShellCheck, SQL validation, Markdown lint on every commit.
+
+## 11 — Cron Automation
+
+`setup_cron.sh` — Installs a cron job to run `generate_daily_report.sh` on a schedule (default: daily at 6am). Idempotent — checks for an existing entry before appending.
+
+**Learn**: `crontab`, cron schedule syntax
 
 ## Future Enhancements
 
 - **Python**: HTML dashboard, CSV reports, Slack notifications
 - **Docker**: Containerize SQLite environment
-- **Cron**: Automatically run daily reports
 - **REST API**: Optional Flask API exposing health/reports/incidents
 - **Monitoring**: Simulate Prometheus metrics
 

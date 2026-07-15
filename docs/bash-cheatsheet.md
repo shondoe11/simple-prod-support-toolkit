@@ -1,6 +1,6 @@
 # Bash Cheatsheet
 
-## ShellCheck (Phase 10)
+## ShellCheck (10)
 
 - **Run it**: `shellcheck scripts/*.sh` — install via `brew install shellcheck` (mac) or `apt-get install shellcheck` (Linux/CI).
 - **Severity filter**: `shellcheck --severity=warning scripts/*.sh` only reports `warning`/`error`, hiding `info`/`style` noise. Severity order (low to high): `style` < `info` < `warning` < `error`.
