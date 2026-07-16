@@ -2,3 +2,5 @@
 *.swp
 .env
 *.log.bak
+__pycache__/
+*.pyc
