@@ -45,6 +45,7 @@ LICENSE
 .gitignore
 docs/                  architecture, roadmap, cheatsheets, incident workflow
 scripts/               health checks, log analysis, incident investigation, db maintenance
+api/                   flask rest api (health/reports/incidents)
 sql/                   schema, seed data, operational troubleshooting queries
 db/                    production.db (SQLite)
 logs/                  simulated application logs
@@ -78,7 +79,9 @@ cd simple-prod-support-toolkit
 docker build -t prod-support-toolkit .
 
 # 3. run an interactive container, mounting the repo so file changes sync back
-docker run -it --rm -v "$(pwd):/app" prod-support-toolkit
+# (-p exposes the Flask API on localhost:5001, see REST API section below.
+#  port 5001 avoids colliding with macOS AirPlay Receiver, which uses 5000)
+docker run -it --rm -p 5001:5000 -v "$(pwd):/app" prod-support-toolkit
 ```
 
 `db/production.db` is already committed and seeded — no setup step needed before running scripts.
@@ -95,6 +98,25 @@ python3 scripts/generate_dashboard.py
 `generate_dashboard.py` produces `reports/dashboard.html` and `reports/daily_report.csv` from `production.db` and `logs/`. Set `SLACK_WEBHOOK_URL` to also post a summary to Slack (stdlib only, no `pip install` required).
 
 See [`docs/roadmap.md`](docs/roadmap.md) for the full list of scripts and what each one does.
+
+### REST API (`api/app.py`)
+
+Flask is pre-installed in the Docker image, not on your host — run the API from inside the container shell:
+
+```bash
+python3 api/app.py
+```
+
+Then from a separate host terminal tab (the container's shell is now occupied running Flask):
+
+```bash
+curl http://localhost:5001/health
+curl http://localhost:5001/reports/daily
+curl http://localhost:5001/incidents/CMP-1023
+curl http://localhost:5001/incidents/jane.doe@example.com
+```
+
+If port 5001 is also taken, change the `-p 5001:5000` mapping in the `docker run` command above to any free host port.
 
 ### Testing cron (`setup_cron.sh`)
 

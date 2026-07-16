@@ -1,6 +1,6 @@
 # Project Roadmap
 
-## 1 — Repository Setup
+## 1 — Repo Setup
 
 **Goals**: Create project, README, folder structure, GitHub repository, MIT License.
 
@@ -109,9 +109,14 @@ Automatically run ShellCheck, SQL validation, Markdown lint on every commit.
 
 **Learn**: Python `sqlite3`, `csv`, `urllib.request`, `html.escape`
 
+## 13 — REST API
+
+`api/app.py` — Flask API exposing `/health` (hostname, uptime, memory, disk, db status, running services), `/reports/daily` (error count, failed jobs, db status, recommendations — reuses `generate_dashboard.py` logic), and `/incidents/<identifier>` (campaign ID or customer email investigation, mirroring `investigate_incident.sh`). Returns JSON; 404s return JSON errors via a custom error handler.
+
+**Learn**: Flask routing, JSON responses, parameterized SQL queries, custom error handlers
+
 ## Future Enhancements
 
-- **REST API**: Optional Flask API exposing health/reports/incidents
 - **Monitoring**: Simulate Prometheus metrics
 
 ## Dev Workflow
@@ -129,6 +134,7 @@ Each concept to become a feature:
 | sed | log_cleanup.sh |
 | find | archive_logs.sh |
 | Python sqlite3/csv | generate_dashboard.py |
+| Flask routing | api/app.py |
 | SQL JOIN | campaign_summary.sql |
 | pipes | investigate_incident.sh |
 

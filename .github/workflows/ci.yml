@@ -44,7 +44,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Compile-check Python scripts
-        run: python3 -m py_compile scripts/*.py
+        run: python3 -m py_compile scripts/*.py api/*.py
 
   markdown-lint:
     name: Markdown Lint
