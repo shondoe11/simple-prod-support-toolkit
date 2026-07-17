@@ -1,16 +1,16 @@
 # Simple Production Support Toolkit
 
-> Improving Linux, Bash, SQL, and Production Support through realistic enterprise scenarios.
+> Improving Linux, Bash, SQL through realistic enterprise scenarios.
 
 ## Vision
 
 **simple-prod-support-toolkit** = hands-on learning project designed to simulate the daily responsibilities in Production Support.
 
-This repo provides a realistic production environment where every script solves an operational problem commonly encountered by support engineers.
+This project provides a realistic production environment where every script solves an operational problem commonly encountered by support engineers.
 
 Inspired by real enterprise application support workflows including:
 
-- Prod health monitoring
+- Production health monitoring
 - Incident investigation
 - SQL troubleshooting
 - Log analysis
@@ -33,7 +33,7 @@ Full phase-by-phase roadmap: [`docs/roadmap.md`](docs/roadmap.md)
 **Shon Messaging Platform** — a cloud platform that delivers millions of emails and notifications every day.
 
 ```text
-Customers -> Campaigns -> API -> Email Service -> Database -> Logs -> Batch Jobs -> Reports
+Customers -> Campaigns -> API -> Email Service -> Db -> Logs -> Batch Jobs -> Reports
 ```
 
 ## Repo Structure
@@ -53,7 +53,7 @@ reports/               generated daily reports
 archive/               compressed old logs
 backups/               timestamped database backups
 .github/workflows/     CI (ShellCheck, SQL validation, markdown lint)
-tests/                 script tests
+tests/                 reserved for future script tests (not yet implemented)
 sample-data/           CSV seed sources
 ```
 
@@ -84,7 +84,7 @@ docker build -t prod-support-toolkit .
 docker run -it --rm -p 5001:5000 -v "$(pwd):/app" prod-support-toolkit
 ```
 
-`db/production.db` is already committed and seeded — no setup step needed before running scripts.
+`db/production.db` is already committed and seeded - no setup step needed before running scripts.
 
 Then inside the container, run any script directly:
 
@@ -114,7 +114,10 @@ curl http://localhost:5001/health
 curl http://localhost:5001/reports/daily
 curl http://localhost:5001/incidents/CMP-1023
 curl http://localhost:5001/incidents/jane.doe@example.com
+curl http://localhost:5001/metrics
 ```
+
+`/metrics` emits Prometheus text-exposition format (`app_error_count`, `app_failed_jobs_total`, `app_db_up`, `app_service_up{service=...}`) — point a real Prometheus server's scrape config at this endpoint to see it in action.
 
 If port 5001 is also taken, change the `-p 5001:5000` mapping in the `docker run` command above to any free host port.
 

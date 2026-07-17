@@ -115,9 +115,11 @@ Automatically run ShellCheck, SQL validation, Markdown lint on every commit.
 
 **Learn**: Flask routing, JSON responses, parameterized SQL queries, custom error handlers
 
-## Future Enhancements
+## 14 — Monitoring
 
-- **Monitoring**: Simulate Prometheus metrics
+`api/app.py` — `/metrics` route emits Prometheus text-exposition format: `app_error_count`, `app_failed_jobs_total`, `app_batch_job_retry_count{job_name=...}`, `app_db_up`, `app_service_up{service=...}`. Scrapeable by a real Prometheus server pointed at the container.
+
+**Learn**: Prometheus text-exposition format, gauges, labels
 
 ## Dev Workflow
 
@@ -135,6 +137,7 @@ Each concept to become a feature:
 | find | archive_logs.sh |
 | Python sqlite3/csv | generate_dashboard.py |
 | Flask routing | api/app.py |
+| Prometheus metrics | api/app.py /metrics |
 | SQL JOIN | campaign_summary.sql |
 | pipes | investigate_incident.sh |
 

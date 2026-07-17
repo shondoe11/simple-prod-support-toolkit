@@ -9,7 +9,7 @@ import sqlite3
 import subprocess
 import sys
 
-from flask import Flask, abort, jsonify
+from flask import Flask, Response, abort, jsonify
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, "..", "db", "production.db")
@@ -56,6 +56,16 @@ def get_top_error(log_dir):
     return max(counts.items(), key=lambda kv: kv[1])[0]
 
 
+#~ which monitored service processes running
+def get_running_services():
+    services = ["sqlite", "nginx", "java", "redis", "python"]
+    running = {}
+    for service in services:
+        result = subprocess.run(["pgrep", "-x", service], capture_output=True)
+        running[service] = result.returncode == 0
+    return running
+
+
 #~ find log lines containing identifier (case-insensitive), used by /incidents
 def search_logs(log_dir, identifier):
     pattern = re.compile(re.escape(identifier), re.IGNORECASE)
@@ -77,11 +87,7 @@ def not_found(err):
 
 @app.route("/health")
 def health():
-    services = ["sqlite", "nginx", "java", "redis", "python"]
-    running = {}
-    for service in services:
-        result = subprocess.run(["pgrep", "-x", service], capture_output=True)
-        running[service] = result.returncode == 0
+    running = get_running_services()
 
     db_status = "unreachable"
     if os.path.isfile(DB_PATH):
@@ -122,6 +128,41 @@ def reports_daily():
             "recommendations": recommendations,
         }
     )
+
+
+@app.route("/metrics")
+def metrics():
+    from generate_dashboard import count_errors, get_db_status, get_failed_jobs
+
+    error_count = count_errors(LOG_DIR)
+    failed_jobs = get_failed_jobs(DB_PATH) or []
+    db_status = get_db_status(DB_PATH)
+    services = get_running_services()
+
+    lines = [
+        "# HELP app_error_count Total ERROR lines found in logs/*.log",
+        "# TYPE app_error_count gauge",
+        f"app_error_count {error_count}",
+        "# HELP app_failed_jobs_total Number of batch jobs currently in failed status",
+        "# TYPE app_failed_jobs_total gauge",
+        f"app_failed_jobs_total {len(failed_jobs)}",
+        "# HELP app_batch_job_retry_count Retry count per failed batch job",
+        "# TYPE app_batch_job_retry_count gauge",
+    ]
+    for job_name, retry_count in failed_jobs:
+        lines.append(f'app_batch_job_retry_count{{job_name="{job_name}"}} {retry_count}')
+
+    lines += [
+        "# HELP app_db_up Whether production.db is reachable (1) or not (0)",
+        "# TYPE app_db_up gauge",
+        f"app_db_up {1 if db_status == 'reachable' else 0}",
+        "# HELP app_service_up Whether a monitored service process is running (1) or not (0)",
+        "# TYPE app_service_up gauge",
+    ]
+    for service, is_running in services.items():
+        lines.append(f'app_service_up{{service="{service}"}} {1 if is_running else 0}')
+
+    return Response("\n".join(lines) + "\n", mimetype="text/plain; version=0.0.4; charset=utf-8")
 
 
 @app.route("/incidents/<identifier>")
